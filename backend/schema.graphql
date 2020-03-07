@@ -2,20 +2,11 @@
 ### Do not make changes to this file directly
 
 
-type Mutation {
-  createOneUser(data: UserCreateInput!): User!
-}
-
 type Query {
   ok: Boolean!
 }
 
 type User {
   id: String!
-  name: String!
-}
-
-input UserCreateInput {
-  id: String
   name: String!
 }
