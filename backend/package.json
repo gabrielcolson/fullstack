@@ -3,9 +3,12 @@
   "description": "",
   "scripts": {
     "lint": "eslint . --ext ts --ignore-path .gitignore",
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node-dev ./src"
+    "build": "npm run -s generate && tsc",
+    "start": "node dist/",
+    "dev": "ts-node-dev ./src",
+    "generate:prisma": "prisma2 generate",
+    "generate:nexus": "ts-node --transpile-only src/schema",
+    "generate": "npm run -s generate:prisma && npm run -s generate:nexus"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +19,7 @@
     "eslint-config-airbnb-typescript": "^7.0.0",
     "eslint-plugin-import": "^2.20.1",
     "prisma2": "^2.0.0-preview022",
+    "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.2"
   },
