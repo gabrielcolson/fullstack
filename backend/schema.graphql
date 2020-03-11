@@ -3,10 +3,16 @@
 
 
 type Query {
-  ok: Boolean!
+  user(where: UserWhereUniqueInput!): User
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, skip: Int): [User!]!
 }
 
 type User {
+  email: String!
   id: String!
-  name: String!
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: String
 }

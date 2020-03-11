@@ -1,5 +1,9 @@
+import env from 'env-var';
+
 import server from './server';
 
-server.listen({ port: 4000 }, (): void => {
-  console.log('🚀 Server ready at: http://localhost:4000');
+const PORT = env.get('PORT').required().asPortNumber();
+
+server.listen({ port: PORT }, (): void => {
+  console.log(`🚀 Server ready at: http://localhost:${PORT}`);
 });
