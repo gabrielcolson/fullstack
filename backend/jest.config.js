@@ -4,4 +4,5 @@ const path = require('path');
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: path.join(__dirname, 'test', '__helpers', 'environment.js'),
+  testPathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/dist'],
 };
