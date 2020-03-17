@@ -6,7 +6,7 @@ import * as allTypes from './graphql';
 
 const schema = makeSchema({
   types: allTypes,
-  plugins: [nexusPrismaPlugin()],
+  plugins: [nexusPrismaPlugin({ prismaClient: (ctx) => ctx.db })],
   outputs: {
     schema: path.join(__dirname, '..', 'schema.graphql'),
     typegen: path.join(__dirname, 'generated', 'nexus.ts'),
@@ -16,7 +16,7 @@ const schema = makeSchema({
     sources: [
       {
         source: '@prisma/client',
-        alias: 'prisma',
+        alias: 'db',
       },
       {
         source: require.resolve('./context'),

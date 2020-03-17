@@ -1,16 +1,18 @@
 import { PrismaClient } from '@prisma/client';
 import { AddressInfo } from 'net';
 
-import express from 'express';
+import express, { Request } from 'express';
 import { HttpLink } from 'apollo-link-http';
 import { DocumentNode, execute, toPromise } from 'apollo-link';
 import { ApolloServer } from 'apollo-server-express';
 import fetch from 'isomorphic-fetch';
+import { Context } from '../../src/context';
 
-import schema from '../src/schema';
+import schema from '../../src/schema';
 
 interface TestServer {
-  graphql: (query: DocumentNode, variables?: any) => any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  graphql: (query: DocumentNode, variables?: unknown) => Promise<any>;
   stop: () => void;
 }
 
@@ -32,7 +34,7 @@ export function startTestServer(server: ApolloServer): TestServer {
     fetch,
   });
 
-  const graphql = (query, variables = {}): Promise<any> => toPromise(execute(link, {
+  const graphql = (query, variables = {}): Promise<unknown> => toPromise(execute(link, {
     query,
     variables,
   }));
@@ -45,6 +47,12 @@ export function startTestServer(server: ApolloServer): TestServer {
   };
 }
 
+const createApolloContext = (prisma: PrismaClient) => ({ req }: { req: Request}): Context => ({
+  db: prisma,
+  req,
+  userId: req.session?.userId,
+});
+
 export function createTestContext(): TestContext {
   const ctx: TestContext = { server: {} as TestServer };
 
@@ -55,7 +63,7 @@ export function createTestContext(): TestContext {
 
     const server = new ApolloServer({
       schema,
-      context: { prisma },
+      context: createApolloContext(prisma),
     });
 
     const testServer = startTestServer(server);
