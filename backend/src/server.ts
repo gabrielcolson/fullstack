@@ -10,12 +10,16 @@ import { Context } from './context';
 import session from './utils/session';
 import { formatError } from './utils/formatError';
 
+export interface ServerConfig {
+  db?: PrismaClient;
+}
+
 class Server {
   db: PrismaClient;
   server: http.Server;
 
-  constructor() {
-    this.db = new PrismaClient();
+  constructor(config?: ServerConfig) {
+    this.db = config?.db ?? new PrismaClient();
 
     const apolloServer = new ApolloServer({
       schema,

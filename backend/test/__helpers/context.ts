@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client';
 import { AddressInfo } from 'net';
 
 import { createHttpLink } from 'apollo-link-http';
