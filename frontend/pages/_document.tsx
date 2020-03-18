@@ -1,31 +1,35 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import { ServerStyleSheets, useTheme } from '@material-ui/core/styles';
 
-import theme from '../utils/theme';
+function MyDocument() {
+  const theme = useTheme();
 
-export default class MyDocument extends Document {
+  return (
+    <html lang="en">
+    <Head>
+      {/* PWA primary color */}
+      <meta name="theme-color" content={theme.palette.primary.main} />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      />
+    </Head>
+    <body>
+    <Main />
+    <NextScript />
+    </body>
+    </html>
+  );
+}
+
+export default class Doc extends Document {
   render() {
-    return (
-      <html lang="en">
-      <Head>
-        {/* PWA primary color */}
-        <meta name="theme-color" content={theme.palette.primary.main} />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-      </Head>
-      <body>
-      <Main />
-      <NextScript />
-      </body>
-      </html>
-    );
+    return <MyDocument/>
   }
 }
 
-MyDocument.getInitialProps = async ctx => {
+Doc.getInitialProps = async ctx => {
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
@@ -42,4 +46,4 @@ MyDocument.getInitialProps = async ctx => {
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
   };
-};
+}

@@ -1,12 +1,39 @@
-import React from 'react';
-import App from 'next/app';
+import React, { useMemo } from 'react';
+import NextApp from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { ColorSchemeProvider, useColorScheme } from '../utils/colorScheme';
 
 import theme from '../utils/theme';
 
-export default class MyApp extends App {
+function MyApp({ children }: { children: React.ReactNode }) {
+  const [colorScheme] = useColorScheme();
+
+  const appTheme = useMemo(() => createMuiTheme({
+    ...theme,
+    palette: {
+      ...theme.palette,
+      type: colorScheme,
+    }
+  }), [colorScheme]);
+
+  return (
+    <>
+      <Head>
+        <title>Fullstack</title>
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+      </Head>
+
+      <ThemeProvider theme={appTheme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </>
+  )
+}
+
+export default class App extends NextApp {
   componentDidMount() {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
@@ -18,17 +45,11 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <>
-        <Head>
-          <title>Fullstack</title>
-          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-        </Head>
-
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+      <ColorSchemeProvider>
+        <MyApp>
           <Component {...pageProps} />
-        </ThemeProvider>
-      </>
+        </MyApp>
+      </ColorSchemeProvider>
     );
   }
 }
