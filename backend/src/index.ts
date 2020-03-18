@@ -1,10 +1,12 @@
 import env from 'env-var';
 
-import server from './server';
+import Server from './server';
 
 const PORT = env.get('PORT').required().asPortNumber();
 
-server.listen({ port: PORT }, (): void => {
+const server = new Server();
+
+server.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`🚀 Server ready at: http://localhost:${PORT}`);
 });

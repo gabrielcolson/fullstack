@@ -1,7 +1,7 @@
 import * as faker from 'faker';
 
-import { createTestContext, TestContext } from './__helpers';
-import { LOGIN, REGISTER } from './__helpers/queries';
+import { createTestContext, TestContext } from './__helpers/context';
+import { LOGIN, LOGOUT, REGISTER } from './__helpers/queries';
 
 const ctx: TestContext = createTestContext();
 
@@ -36,6 +36,7 @@ describe('login mutation', () => {
   it('should login a user', async () => {
     const userData = { email: faker.internet.email(), password: faker.internet.password() };
     await ctx.server.graphql(REGISTER, userData);
+    await ctx.server.graphql(LOGOUT);
 
     const want = { email: userData.email };
     const { data: { login: got } } = await ctx.server.graphql(LOGIN, userData);

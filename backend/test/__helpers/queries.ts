@@ -15,3 +15,20 @@ export const LOGIN = gql`
         }
     }
 `;
+
+export const LOGOUT = gql`
+  mutation {
+      logout {
+          email
+      }
+  }
+`;
+
+export const ME = gql`
+    {
+        me {
+            id
+            email
+        }
+    }
+`;

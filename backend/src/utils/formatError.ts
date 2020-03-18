@@ -1,11 +1,12 @@
-import { AuthenticationError, ForbiddenError } from 'apollo-server-express';
+import { AuthenticationError, ForbiddenError, ValidationError } from 'apollo-server-express';
 import { GraphQLError } from 'graphql';
+import { ValidationError as YupError } from 'yup';
 
 import * as errors from './errors';
 
 export function formatError(err: GraphQLError): Error {
   const { originalError } = err;
-  if (originalError instanceof errors.CustomError) {
+  if (originalError instanceof errors.CustomError && originalError.error) {
     // eslint-disable-next-line no-console
     console.log(originalError.error);
   }
@@ -15,6 +16,9 @@ export function formatError(err: GraphQLError): Error {
   }
   if (originalError instanceof errors.ForbiddenError) {
     return new ForbiddenError(originalError.message);
+  }
+  if (originalError instanceof YupError) {
+    return new ValidationError(originalError.message);
   }
 
   // eslint-disable-next-line no-console
