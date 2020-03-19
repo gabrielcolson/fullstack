@@ -52,7 +52,6 @@ function MobileAuthMenu() {
         id="menu"
         elevation={0}
         anchorEl={anchorEl}
-        keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
         MenuListProps={{ classes: { root: styles.menu } }}
