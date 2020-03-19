@@ -21,7 +21,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function Footer(props): JSX.Element {
+function Footer(): JSX.Element {
   const styles = useStyle();
 
   return (
