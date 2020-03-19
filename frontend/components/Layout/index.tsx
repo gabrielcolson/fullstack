@@ -10,11 +10,6 @@ const useStyles = makeStyles(theme => ({
     minHeight: '100vh',
     flexDirection: 'column',
   },
-  footer: {
-    marginTop: 'auto',
-    height: '50px',
-    backgroundColor: theme.palette.secondary.main,
-  }
 }));
 
 interface Props {
@@ -28,7 +23,7 @@ function Layout({ children }: Props): JSX.Element {
     <Paper elevation={0} className={styles.root}>
         <Header />
         {children}
-        <Footer className={styles.footer} />
+        <Footer />
     </Paper>
 );
 }
