@@ -5,18 +5,14 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ColorSchemeProvider, useColorScheme } from '../utils/colorScheme';
 
-import theme from '../utils/theme';
+import { lightTheme, darkTheme } from '../utils/theme';
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const [colorScheme] = useColorScheme();
 
-  const appTheme = useMemo(() => createMuiTheme({
-    ...theme,
-    palette: {
-      ...theme.palette,
-      type: colorScheme,
-    }
-  }), [colorScheme]);
+  const appTheme = useMemo(() => createMuiTheme(
+    colorScheme === 'dark' ? darkTheme : lightTheme
+  ), [colorScheme]);
 
   return (
     <>
