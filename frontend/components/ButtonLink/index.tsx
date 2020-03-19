@@ -8,7 +8,7 @@ export type ButtonLinkProps = Omit<ButtonProps, 'href' | 'classes'> &
 const ButtonLink = React.forwardRef<ButtonLinkProps, any>(
   ({ href, as, prefetch, ...props }, ref) => (
     <Link href={href} as={as} prefetch={prefetch} passHref>
-      <Button ref={ref} disableRipple style={{ background: 'transparent', textTransform: 'none' }} {...props} />
+      <Button ref={ref} {...props} />
     </Link>
   )
 );

@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import { MouseEvent, useState } from 'react';
-import Button from '@material-ui/core/Button';
+
+import ButtonLink from '../../../ButtonLink';
 
 const useStyles = makeStyles(theme => ({
   popoverPaper: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     display: 'flex',
     flexDirection: 'column',
-    '& > button': {
+    '& > a': {
       marginBottom: theme.spacing(2),
     }
   }
@@ -57,8 +58,8 @@ function MobileAuthMenu() {
         MenuListProps={{ classes: { root: styles.menu } }}
         PaperProps={{ square: true }}
       >
-        <Button fullWidth variant="outlined">Login</Button>
-        <Button fullWidth variant="contained" color="primary">Register</Button>
+        <ButtonLink href="/login" fullWidth variant="outlined">Login</ButtonLink>
+        <ButtonLink href="/register" fullWidth variant="contained" color="primary">Register</ButtonLink>
       </Menu>
     </>
   );

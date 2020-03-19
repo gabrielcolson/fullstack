@@ -2,12 +2,12 @@ import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
 import LightIcon from '@material-ui/icons/WbSunny';
 import DarkIcon from '@material-ui/icons/Brightness2';
 import IconButton from '@material-ui/core/IconButton';
+import React from 'react';
 
 import { useColorScheme } from '../../../utils/colorScheme';
 import ButtonLink from '../../ButtonLink';
@@ -39,7 +39,11 @@ function Header(): JSX.Element {
     <Box component="header" border={1} borderTop={0} borderLeft={0} borderRight={0} borderColor="divider">
       <AppBar elevation={0} color="secondary" position="sticky">
         <Toolbar className={styles.toolbar}>
-          <ButtonLink href="/">
+          <ButtonLink
+            disableRipple
+            style={{ background: 'transparent', textTransform: 'none' }}
+            href="/"
+          >
             <Typography component="h1" variant="h5">
               Fullstack
             </Typography>
@@ -55,8 +59,21 @@ function Header(): JSX.Element {
               </IconButton>
 
             <Hidden implementation="css" xsDown>
-              <Button color="primary" className={styles.loginButton} variant="outlined">Login</Button>
-              <Button color="primary" variant="contained">Register</Button>
+              <ButtonLink
+                href="/login"
+                color="primary"
+                className={styles.loginButton}
+                variant="outlined"
+              >
+                Login
+              </ButtonLink>
+              <ButtonLink
+                href="/register"
+                color="primary"
+                variant="contained"
+              >
+                Register
+              </ButtonLink>
             </Hidden>
             <Hidden implementation="css" smUp>
               <MobileAuthMenu/>
