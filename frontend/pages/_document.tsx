@@ -14,17 +14,13 @@ function MyDocument() {
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
       />
       <meta charSet='utf-8'/>
-      <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
-      <meta name='viewport'
-            content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
-      <meta name='description' content='Description'/>
-      <meta name='keywords' content='Keywords'/>
-      <title>Next.js PWA Example</title>
+      <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+      <meta name='description' content='Full stack demo'/>
+      <meta name='keywords' content='react fullstack demo prisma node'/>
 
       <link rel="manifest" href="/manifest.json"/>
       <link href='/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16'/>
       <link href='/favicon-32x32.png' rel='icon' type='image/png' sizes='32x32'/>
-      <link rel="apple-touch-icon" href="/apple-icon.png"></link>
       <meta name="theme-color" content={theme.palette.primary.main} />
     </Head>
     <body>
@@ -35,7 +31,7 @@ function MyDocument() {
   );
 }
 
-export default class Doc extends Document {
+class Doc extends Document {
   render() {
     return <MyDocument/>
   }
@@ -58,4 +54,6 @@ Doc.getInitialProps = async ctx => {
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
   };
-}
+};
+
+export default Doc;
