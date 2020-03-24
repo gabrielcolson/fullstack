@@ -27,11 +27,9 @@ class CustomDocument extends Document {
       <html lang="en">
       <Head>
 
-        <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com/"/>
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+          href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap"
         />
 
         <meta charSet='utf-8'/>
