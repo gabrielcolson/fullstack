@@ -1,7 +1,7 @@
 import { useMediaQuery } from '@material-ui/core';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
-import useLocalStorage from '../hooks/useLocalStorage';
+import useCookie from '../hooks/useCookie';
 
 interface ColorScheme {
   scheme: 'light' | 'dark';
@@ -12,7 +12,7 @@ const ColorSchemeContext = createContext(null as unknown as ColorScheme);
 
 export function ColorSchemeProvider(props): JSX.Element {
   const systemPrefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true });
-  const [prefersDarkMode, setPrefersDarkMode] = useLocalStorage('prefersDarkMode', systemPrefersDarkMode);
+  const [prefersDarkMode, setPrefersDarkMode] = useCookie<boolean>('prefersDarkMode', systemPrefersDarkMode);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function ColorSchemeProvider(props): JSX.Element {
   useEffect(() => setMounted(true), []);
 
   const toggle = () => {
-    setPrefersDarkMode((toggle) => !toggle);
+    setPrefersDarkMode(!prefersDarkMode);
   };
 
   const value = useMemo<ColorScheme>(() => ({

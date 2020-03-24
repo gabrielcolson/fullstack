@@ -18,7 +18,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
     <>
       <Head>
         <title>Fullstack</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta name="theme-color" content={appTheme.palette.secondary.main} />
       </Head>
 
       <ThemeProvider theme={appTheme}>
