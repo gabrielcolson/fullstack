@@ -18,7 +18,7 @@
     "apollo-server-express": "^2.11.0",
     "bcryptjs": "^2.4.3",
     "env-var": "^6.0.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.0",
     "graphql": "^14.6.0",
     "nexus": "^0.12.0-rc.13",
